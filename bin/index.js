@@ -2,10 +2,10 @@
 const meow = require('meow');
 const typeGen = require('./graphql-typegen');
 const conf = require('rc')('typegen', {
-  endpoint: 'http://wayfaircom.csnzoo.com/graphql',
-  header: 'Cookie: SERVER=MASTER',
-  output: './',
-  queries: './**/*.js',
+  endpoint: 'https://wayfaircom.csnzoo.com/graphql',
+  header: 'Cookie: server=MASTER',
+  output: 'generated_types.js',
+  queries: 'js',
   target: 'flow'
 });
 
@@ -18,12 +18,13 @@ const cli = meow(
     Options
       --help         Show command help
       -E, --endpoint [default: http://wayfaircom.csnzoo.com/graphql] The URL of the server to fetch the schema from
-      -H, --header   [default: 'Cookie: SERVER=MASTER'] Additional headers to send to server for introspectionQuery
-                     (Hint: You probably want 'Cookie: SERVER=<YOUR_VM_NAME>')
-      -O, --output   [default: ./] Directory and filename to write types to
-      -Q, --queries  [default: ./**/*.js] Path to GraphQL queries (gql tags)
-      -S, --schema   (optional) Use the given schema instead of using the result of an introspection query
+      -H, --header   [default: 'Cookie: server=MASTER'] Additional headers to send to server for introspectionQuery
+                     (Hint: You probably want 'Cookie: server=<YOUR_VM_NAME>')
+      -G, --glob     [default: ./] Glob pattern for directory matching. Provide a unique pattern to your sub-directory to generate types for.
+      -O, --output   [default: 'generated_types.js'] Filename to write types to.
+      -Q, --queries  [default: 'js'] Filetype extension to find GraphQL queries in (gql tags).
       -T, --target   [default: flow] (swift | typescript | flow | scala)
+      -S, --schema   (optional) Use the given schema instead of using the result of an introspection query
 `,
   {
     flags: {
@@ -34,6 +35,10 @@ const cli = meow(
       header: {
         type: 'string',
         alias: 'H'
+      },
+      glob: {
+        type: 'string',
+        alias: 'G'
       },
       output: {
         type: 'string',
