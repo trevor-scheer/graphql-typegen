@@ -1,0 +1,16 @@
+{
+  "name": "graphql-typegen",
+  "version": "1.0.0",
+  "description": "Type generator for GraphQL queries",
+  "main": "index.js",
+  "bin": {
+    "graphql-typegen": "bin/index.js"
+  },
+  "author": "Trevor Scheer",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-cli": "^0.4.0",
+    "meow": "^5.0.0",
+    "rc": "^1.2.8"
+  }
+}
